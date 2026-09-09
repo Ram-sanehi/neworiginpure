@@ -6,21 +6,28 @@ import { QuickBenefitsSection } from './components/sections/QuickBenefitsSection
 import { ProductDiscoverySection } from './components/sections/ProductDiscoverySection';
 import { FeaturedProductSection } from './components/sections/FeaturedProductSection';
 import { CustomerReviewsSection } from './components/sections/CustomerReviewsSection';
-import { WhyThisTeaSection } from './components/sections/WhyThisTeaSection';
 import { ImmersiveIngredientsSection } from './components/sections/ImmersiveIngredientsSection';
 import { BotanicalCollectionSection } from './components/sections/BotanicalCollectionSection';
 import { BrandStorySection } from './components/sections/BrandStorySection';
 import { AmazonTrustSection } from './components/sections/AmazonTrustSection';
 import { InstagramSection } from './components/sections/InstagramSection';
-import { LaunchOfferSection } from './components/sections/LaunchOfferSection';
 import { FAQSection } from './components/sections/FAQSection';
 import { FinalCTASection } from './components/sections/FinalCTASection';
 import { StickyMobileCTA } from './components/layout/StickyMobileCTA';
 import { Footer } from './components/layout/Footer';
+import { ProductDetailPage } from './components/pages/ProductDetailPage';
+import { PRODUCTS } from './data/products';
 
 export function App() {
+  const productId = window.location.pathname.match(/^\/products\/([^/]+)\/?$/)?.[1];
+  const detailProduct = productId ? PRODUCTS.find((product) => product.id === productId) : undefined;
+
+  if (detailProduct) {
+    return <ProductDetailPage product={detailProduct} />;
+  }
+
   return (
-    <div className="min-h-screen flex flex-col bg-cream-100 font-sans text-charcoal-900 selection:bg-teagreen-800 selection:text-cream-50">
+    <div className="min-h-screen flex flex-col bg-white font-sans text-charcoal-900 selection:bg-teagreen-800 selection:text-cream-50">
       {/* Top Meta Ads Announcement Banner */}
       <AnnouncementBar />
 
@@ -44,27 +51,21 @@ export function App() {
         {/* Realistic Customer Social Proof */}
         <CustomerReviewsSection />
 
-        {/* Brand Philosophy & Sourcing */}
-        <WhyThisTeaSection />
-
-        {/* Immersive Ingredient Experience */}
+        {/* Brand values and sourcing story */}
         <ImmersiveIngredientsSection />
 
-        {/* Collection-wide ingredient index */}
+        {/* Sole collection-wide ingredient library */}
         <BotanicalCollectionSection />
 
         {/* Human Founder Story */}
         <BrandStorySection />
 
-        {/* Amazon Launch Offer */}
-        <LaunchOfferSection />
-
-        {/* Frequently Asked Questions */}
-        <FAQSection />
-
         {/* Amazon confidence and community */}
         <AmazonTrustSection />
         <InstagramSection />
+
+        {/* Frequently Asked Questions */}
+        <FAQSection />
 
         {/* Final Conversion CTA */}
         <FinalCTASection />

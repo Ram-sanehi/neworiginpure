@@ -4,7 +4,7 @@ import { Container } from '../ui/Container';
 import { PRODUCTS } from '../../data/products';
 
 export const InstagramSection: React.FC = () => (
-  <section className="border-t border-cream-300/80 bg-cream-100 py-14 sm:py-20">
+  <section className="border-t border-cream-300/80 bg-white py-14 sm:py-20">
     <Container>
       <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
         <div className="space-y-3">
@@ -17,8 +17,8 @@ export const InstagramSection: React.FC = () => (
           <a href="https://www.instagram.com/originpure.in/" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-teagreen-800 px-5 py-3 text-sm font-bold text-teagreen-950 transition-colors hover:bg-cream-200">View Latest Posts <ArrowUpRight className="h-4 w-4" /></a>
         </div>
       </div>
-      <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {PRODUCTS.slice(0, 4).map((product) => <a key={product.id} href="https://www.instagram.com/originpure.in/" target="_blank" rel="noreferrer" className="group aspect-square overflow-hidden rounded-2xl border border-cream-300 bg-sand-100"><img src={product.images[1] || product.images[0]} alt="Origin Pure tea story" loading="lazy" className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" /></a>)}
+      <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {PRODUCTS.map((product) => <a key={product.id} href="https://instagram.com/originpure.in" target="_blank" rel="noreferrer" className="group aspect-square overflow-hidden rounded-2xl border border-cream-300 bg-sand-100"><img src={product.images[1] || product.images[0]} alt={`${product.name} tea story`} loading="lazy" className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" /></a>)}
       </div>
     </Container>
   </section>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { redirectToAmazon } from '../../lib/amazon';
 import { MAIN_FEATURED_PRODUCT } from '../../data/products';
-import { ExternalLink } from 'lucide-react';
+import { AmazonCtaImage } from '../ui/AmazonCtaImage';
 
 export const AnnouncementBar: React.FC = () => {
   const handleAmazonBuy = () => {
@@ -16,10 +16,10 @@ export const AnnouncementBar: React.FC = () => {
         </span>
         <button
           onClick={handleAmazonBuy}
-          className="underline font-bold text-amber-300 hover:text-amber-200 ml-1 inline-flex items-center gap-1 focus:outline-none"
+          aria-label="Buy on Amazon"
+          className="ml-1 inline-flex items-center focus:outline-none"
         >
-          <span>Shop now</span>
-          <ExternalLink className="w-3 h-3" />
+          <AmazonCtaImage className="h-7 w-auto object-contain" />
         </button>
       </div>
     </div>

@@ -3,12 +3,13 @@ import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
 import { MAIN_FEATURED_PRODUCT } from '../../data/products';
 import { redirectToAmazon } from '../../lib/amazon';
-import { Tag, Sparkles, ShieldCheck, Truck, ExternalLink } from 'lucide-react';
+import { Tag, Sparkles, ShieldCheck, Truck } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { AmazonCtaImage } from '../ui/AmazonCtaImage';
 
 export const LaunchOfferSection: React.FC = () => {
   const handleAmazonBuy = () => {
-    redirectToAmazon('https://www.amazon.in/dp/B0HG9J3ZDX', 'launch-offer-cta', MAIN_FEATURED_PRODUCT.id);
+    redirectToAmazon(MAIN_FEATURED_PRODUCT.amazonUrl, 'launch-offer-cta', MAIN_FEATURED_PRODUCT.id);
   };
 
   return (
@@ -61,13 +62,11 @@ export const LaunchOfferSection: React.FC = () => {
               fullWidth
               glow
               onClick={handleAmazonBuy}
+              aria-label="Buy on Amazon"
               className="py-4 text-sm font-bold tracking-wider"
               data-track-cta="launch-offer-buy-amazon"
             >
-              <span className="flex items-center justify-center gap-2">
-                <span>Buy on Amazon</span>
-                <ExternalLink className="w-4.5 h-4.5" />
-              </span>
+              <AmazonCtaImage className="absolute inset-0 h-full w-full object-contain" />
             </Button>
           </div>
 

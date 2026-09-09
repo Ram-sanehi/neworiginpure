@@ -3,8 +3,9 @@ import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
 import { MAIN_FEATURED_PRODUCT } from '../../data/products';
 import { redirectToAmazon } from '../../lib/amazon';
-import { ExternalLink, ShieldCheck, Star, Leaf } from 'lucide-react';
+import { ShieldCheck, Star, Leaf } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { AmazonCtaImage } from '../ui/AmazonCtaImage';
 
 export const FinalCTASection: React.FC = () => {
   const handleAmazonBuy = () => {
@@ -49,13 +50,11 @@ export const FinalCTASection: React.FC = () => {
               fullWidth
               glow
               onClick={handleAmazonBuy}
-              className="py-4 text-base font-bold tracking-wider text-black bg-[#FF9900] hover:bg-[#E68A00] border border-[#E68A00] shadow-xl"
+              aria-label="Buy on Amazon"
+              className="py-4 text-base font-bold tracking-wider text-[#FF9900] bg-[#131A22] hover:bg-[#232F3E] border border-[#FF9900] shadow-xl"
               data-track-cta="final-buy-amazon"
             >
-              <span className="flex items-center justify-center gap-2.5">
-                <span>Buy on Amazon</span>
-                <ExternalLink className="w-5 h-5" />
-              </span>
+              <AmazonCtaImage className="absolute inset-0 h-full w-full object-contain" />
             </Button>
 
             <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-cream-300/75 font-medium pt-1">

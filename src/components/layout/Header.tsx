@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Leaf, Menu, X, ArrowRight, ExternalLink } from 'lucide-react';
+import { Leaf, Menu, X, ArrowRight } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
 import { redirectToAmazon } from '../../lib/amazon';
 import { MAIN_FEATURED_PRODUCT } from '../../data/products';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AmazonCtaImage } from '../ui/AmazonCtaImage';
 
 import brandLogo from '../../images/logo.jpeg';
 
@@ -87,12 +88,10 @@ export const Header: React.FC = () => {
               variant="primary"
               size="sm"
               onClick={handleAmazonBuy}
+              aria-label="Buy on Amazon"
               data-track-cta="header-buy-amazon"
             >
-              <span className="flex items-center gap-1.5">
-                <span>Buy on Amazon</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </span>
+              <AmazonCtaImage className="absolute inset-0 h-full w-full object-contain" />
             </Button>
           </div>
 
@@ -102,10 +101,11 @@ export const Header: React.FC = () => {
               variant="primary"
               size="sm"
               onClick={handleAmazonBuy}
+              aria-label="Buy on Amazon"
               className="min-h-11 px-3 text-[11px] font-bold"
               data-track-cta="mobile-header-buy-amazon"
             >
-              <span>Buy on Amazon</span>
+              <AmazonCtaImage className="absolute inset-0 h-full w-full object-contain" />
             </Button>
 
             <button
@@ -166,8 +166,9 @@ export const Header: React.FC = () => {
                     setMobileMenuOpen(false);
                     handleAmazonBuy();
                   }}
+                  aria-label="Buy on Amazon"
                 >
-                  Buy on Amazon
+                  <AmazonCtaImage className="absolute inset-0 h-full w-full object-contain" />
                 </Button>
               </div>
             </motion.div>

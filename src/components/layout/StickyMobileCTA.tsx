@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MAIN_FEATURED_PRODUCT } from '../../data/products';
 import { redirectToAmazon } from '../../lib/amazon';
 import { Button } from '../ui/Button';
-import { ExternalLink } from 'lucide-react';
+import { AmazonCtaImage } from '../ui/AmazonCtaImage';
 import { formatCurrency } from '../../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -20,7 +20,7 @@ export const StickyMobileCTA: React.FC = () => {
   }, []);
 
   const handleAmazonBuy = () => {
-    redirectToAmazon('https://www.amazon.in/dp/B0HG9J3ZDX', 'sticky-mobile-cta', product.id);
+    redirectToAmazon(product.amazonUrl, 'sticky-mobile-cta', product.id);
   };
 
   return (
@@ -64,13 +64,11 @@ export const StickyMobileCTA: React.FC = () => {
               size="sm"
               glow
               onClick={handleAmazonBuy}
+              aria-label="Buy on Amazon"
               className="w-full py-2.5 px-4 text-xs font-bold shrink-0"
               data-track-cta="sticky-mobile-buy-amazon"
             >
-              <span className="flex items-center gap-1.5">
-                <span>Buy on Amazon</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </span>
+              <AmazonCtaImage className="absolute inset-0 h-full w-full object-contain" />
             </Button>
           </div>
         </motion.div>

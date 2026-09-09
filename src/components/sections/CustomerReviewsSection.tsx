@@ -62,7 +62,7 @@ export const CustomerReviewsSection: React.FC = () => {
   const visible = REVIEWS.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
 
   return (
-    <section id="reviews" className="py-10 sm:py-24 bg-cream-100 border-t border-cream-300/60">
+    <section id="reviews" className="py-10 sm:py-24 bg-white border-t border-cream-300/60">
       <Container size="md">
 
         {/* ── Header ─────────────────────────────────────────────────────── */}

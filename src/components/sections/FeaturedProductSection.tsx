@@ -4,17 +4,18 @@ import { Button } from '../ui/Button';
 import { Rating } from '../ui/Rating';
 import { MAIN_FEATURED_PRODUCT } from '../../data/products';
 import { redirectToAmazon } from '../../lib/amazon';
-import { ExternalLink, CheckCircle2, Thermometer, Clock, Sparkles } from 'lucide-react';
+import { CheckCircle2, Thermometer, Clock, Sparkles } from 'lucide-react';
 import { formatCurrency } from '../../lib/utils';
 import { motion } from 'framer-motion';
 
 import { ProductImageGallery } from '../ui/ProductImageGallery';
+import { AmazonCtaImage } from '../ui/AmazonCtaImage';
 
 export const FeaturedProductSection: React.FC = () => {
   const product = MAIN_FEATURED_PRODUCT;
 
   const handleAmazonBuy = () => {
-    redirectToAmazon('https://www.amazon.in/dp/B0HG9J3ZDX', 'featured-product-cta', product.id);
+    redirectToAmazon(product.amazonUrl, 'featured-product-cta', product.id);
   };
 
   return (
@@ -96,37 +97,8 @@ export const FeaturedProductSection: React.FC = () => {
               {product.fullDescription}
             </p>
 
-            {/* Key Highlights Checklist */}
-            <div className="space-y-2 pt-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-charcoal-800 block">
-                KEY HIGHLIGHTS
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-charcoal-900">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-teagreen-700 shrink-0" />
-                  <span>Refreshing floral & citrus flavour</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-teagreen-700 shrink-0" />
-                  <span>Individually packed pyramid bags</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-teagreen-700 shrink-0" />
-                  <span>Simple three-ingredient blend</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-teagreen-700 shrink-0" />
-                  <span>Easy & quick brewing</span>
-                </div>
-                <div className="flex items-center gap-2 sm:col-span-2">
-                  <CheckCircle2 className="w-4 h-4 text-teagreen-700 shrink-0" />
-                  <span>25 servings per pack (50g total)</span>
-                </div>
-              </div>
-            </div>
-
             {/* Product Details Pills */}
-            <div className="space-y-2">
+            <div className="space-y-2 pt-1">
               <span className="text-xs font-bold uppercase tracking-wider text-charcoal-800 block">
                 PRODUCT SPECIFICATIONS
               </span>
@@ -154,13 +126,11 @@ export const FeaturedProductSection: React.FC = () => {
                 fullWidth
                 glow
                 onClick={handleAmazonBuy}
+                aria-label="Buy on Amazon"
                 className="py-4 text-sm sm:text-base font-bold tracking-wider"
                 data-track-cta="featured-buy-amazon"
               >
-                <span className="flex items-center justify-center gap-2">
-                  <span>Buy on Amazon</span>
-                  <ExternalLink className="w-4.5 h-4.5" />
-                </span>
+                <AmazonCtaImage className="absolute inset-0 h-full w-full object-contain" />
               </Button>
 
               <p className="text-center text-xs text-charcoal-800/70 font-medium">

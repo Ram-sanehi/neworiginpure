@@ -115,6 +115,9 @@ export const Footer: React.FC = () => {
             <p className="text-xs text-teagreen-400 font-medium">
               © {new Date().getFullYear()} Origin Pure by Foxgle · Coimbatore, Tamil Nadu, India. All rights reserved.
             </p>
+            <p className="text-xs text-cream-200/75 font-medium">
+              FSSAI License No.: <span className="text-amber-300">Pending verified license number</span>
+            </p>
           </div>
 
           {/* Quick Links Column */}
