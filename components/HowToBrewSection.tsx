@@ -1,11 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { waitForImagesReady } from "@/components/RevealImage";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
   {
@@ -83,162 +77,35 @@ function LeafCupIcon({ className }: { className?: string }) {
 }
 
 export default function HowToBrewSection() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [compactLayout, setCompactLayout] = useState(false);
-
-  useEffect(() => {
-    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const compactHeightQuery = window.matchMedia("(max-height: 700px)");
-
-    const updateLayout = () => {
-      setCompactLayout(reducedMotionQuery.matches || compactHeightQuery.matches || window.innerWidth < 768);
-    };
-
-    updateLayout();
-    reducedMotionQuery.addEventListener("change", updateLayout);
-    compactHeightQuery.addEventListener("change", updateLayout);
-    window.addEventListener("resize", updateLayout);
-
-    if (compactLayout || reducedMotionQuery.matches) {
-      return () => {
-        reducedMotionQuery.removeEventListener("change", updateLayout);
-        compactHeightQuery.removeEventListener("change", updateLayout);
-        window.removeEventListener("resize", updateLayout);
-      };
-    }
-
-    let ctx: gsap.Context | undefined;
-    const setup = () => {
-      ctx = gsap.context(() => {
-        const rows = gsap.utils.toArray<HTMLElement>(".brew-step");
-        const progressLine = document.querySelector(".brew-progress-line");
-
-        rows.forEach((step, index) => {
-          gsap.fromTo(
-            step,
-            { opacity: 0, scale: 0.85, y: 36 },
-            {
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: step,
-                start: "top 78%",
-              },
-            }
-          );
-
-          const icon = step.querySelector("svg");
-          if (icon) {
-            const paths = Array.from(icon.querySelectorAll("path, circle, line, polyline, polygon")) as SVGGeometryElement[];
-            paths.forEach((shape) => {
-              const length = shape.getTotalLength();
-              gsap.set(shape, {
-                strokeDasharray: length,
-                strokeDashoffset: length,
-              });
-
-              gsap.to(shape, {
-                strokeDashoffset: 0,
-                duration: 0.9,
-                ease: "power2.out",
-                delay: index * 0.12,
-                scrollTrigger: {
-                  trigger: step,
-                  start: "top 78%",
-                },
-              });
-            });
-          }
-        });
-
-        if (progressLine) {
-          gsap.to(progressLine, {
-            scaleY: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top center",
-              end: "bottom center",
-              scrub: true,
-            },
-          });
-        }
-      }, sectionRef);
-    };
-
-    const cleanup = waitForImagesReady(sectionRef.current, setup);
-
-    return () => {
-      reducedMotionQuery.removeEventListener("change", updateLayout);
-      compactHeightQuery.removeEventListener("change", updateLayout);
-      window.removeEventListener("resize", updateLayout);
-      cleanup();
-      ctx?.revert();
-    };
-  }, [compactLayout]);
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden bg-[#F6EFE2] py-20 lg:py-28"
-      style={{
-        backgroundImage: "linear-gradient(180deg, rgba(246,239,226,0.9), rgba(246,239,226,0.9)), url('/prdimg/LemonGinger/1.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <section className="relative overflow-hidden bg-[#1B4332] py-12 text-[#FFF8E7] lg:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="mb-10 text-center lg:text-left">
-          <p className="text-xs uppercase tracking-[0.24em] text-[#1B4332]/60">brew guide</p>
-          <h2 className="mt-3 font-serif text-4xl text-[#1B4332] md:text-5xl">How to Brew</h2>
+        <div className="mb-8 flex items-baseline justify-between gap-4">
+          <div>
+            <p className="text-[10px] font-medium uppercase tracking-[0.26em] text-[#FFF8E7]/60">Brew guide</p>
+            <h2 className="mt-2 font-serif text-3xl text-[#FFF8E7] md:text-4xl">How to Brew</h2>
+          </div>
+          <p className="hidden text-xs text-[#FFF8E7]/50 sm:block">A simple four-step ritual</p>
         </div>
 
-        {!compactLayout && (
-          <div className="hidden lg:block">
-            <div className="relative mx-auto max-w-5xl pl-6">
-              <div className="brew-progress-line absolute left-[53px] top-8 h-[calc(100%-64px)] w-[2px] origin-top scale-y-0 bg-[#D4A017]/60" />
-
-              <div className="space-y-8">
-                {steps.map(({ number, title, description, icon: Icon }) => (
-                  <div key={number} className="brew-step relative flex items-start gap-6 rounded-[1.5rem] bg-[#FFF8E7]/80 p-5 shadow-[0_18px_40px_rgba(27,67,50,0.05)]">
-                    <div className="relative z-10 flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#1B4332] text-[#FFF8E7] shadow-[0_18px_30px_rgba(27,67,50,0.2)]">
-                      <Icon className="h-9 w-9" />
-                    </div>
-
-                    <div className="pt-2">
-                      <div className="text-xs uppercase tracking-[0.24em] text-[#1B4332]/55">{number}</div>
-                      <h3 className="mt-2 font-serif text-3xl text-[#1B4332]">{title}</h3>
-                      <p className="mt-2 max-w-xl text-base leading-7 text-[#1B4332]/72">{description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+        <div className="relative">
+          <div className="absolute left-6 top-7 h-[calc(100%-56px)] w-px bg-[#D4A017]/45 sm:hidden" />
+          <div className="absolute left-[12.5%] right-[12.5%] top-7 hidden h-px bg-[#D4A017]/45 sm:block" />
+          <div className="grid gap-3 sm:grid-cols-4 sm:gap-4">
+            {steps.map(({ number, title, description, icon: Icon }) => (
+              <article key={number} className="brew-step relative z-10 flex min-h-[98px] items-center gap-4 rounded-xl border border-[#1B4332]/10 bg-white p-4 text-[#1B4332] shadow-[0_12px_28px_rgba(0,0,0,0.12)] sm:block sm:min-h-[214px] sm:rounded-[1.2rem] sm:p-5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#1B4332] text-[#FFF8E7] sm:h-14 sm:w-14">
+                  <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
+                </div>
+                <div className="flex-1 sm:mt-5">
+                  <div className="text-[10px] font-medium uppercase tracking-[0.22em] text-[#1B4332]/48">{number}</div>
+                  <h3 className="mt-1 font-serif text-2xl text-[#1B4332]">{title}</h3>
+                  <p className="mt-1 text-xs leading-5 text-[#1B4332]/65 sm:max-w-[14rem]">{description}</p>
+                </div>
+              </article>
+            ))}
           </div>
-        )}
-
-        {compactLayout && (
-          <div className="lg:hidden">
-            <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {steps.map(({ number, title, description, icon: Icon }) => (
-                <article
-                  key={number}
-                  className="brew-step snap-center shrink-0 w-[86%] rounded-[1.8rem] border border-[#1B4332]/10 bg-[#FFF8E7] p-5 shadow-[0_18px_38px_rgba(27,67,50,0.06)]"
-                >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#1B4332] text-[#FFF8E7]">
-                    <Icon className="h-8 w-8" />
-                  </div>
-                  <div className="mt-5 text-xs uppercase tracking-[0.22em] text-[#1B4332]/55">{number}</div>
-                  <h3 className="mt-2 font-serif text-3xl text-[#1B4332]">{title}</h3>
-                  <p className="mt-3 text-base leading-7 text-[#1B4332]/72">{description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import RevealImage from "@/components/RevealImage";
 import { Product } from "@/lib/products";
@@ -108,9 +109,17 @@ function ProductDetail({
                 href={product.amazonUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="brand-cta"
+                aria-label={`Shop ${product.name} on Amazon`}
+                className="group block w-[180px] shrink-0 transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#1B4332]/40"
               >
-                Buy on Amazon
+                <Image
+                  src="/prdimg/img.png"
+                  alt="Shop on Amazon"
+                  width={2163}
+                  height={727}
+                  sizes="180px"
+                  className="h-auto w-full drop-shadow-[0_12px_20px_rgba(0,0,0,0.22)]"
+                />
               </a>
             </div>
 
@@ -229,9 +238,17 @@ function ProductDetail({
                 href={product.amazonUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="brand-cta px-6 py-3.5"
+                aria-label={`Shop ${product.name} on Amazon`}
+                className="group block w-[180px] shrink-0 transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#1B4332]/40"
               >
-                Buy on Amazon
+                <Image
+                  src="/prdimg/img.png"
+                  alt="Shop on Amazon"
+                  width={2163}
+                  height={727}
+                  sizes="180px"
+                  className="h-auto w-full drop-shadow-[0_12px_20px_rgba(0,0,0,0.22)]"
+                />
               </a>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import RevealImage from "@/components/RevealImage";
+import Image from "next/image";
 
 const rituals = [
   { title: "Bloom", copy: "Steep with warm water and let the leaves open slowly for a fuller aroma." },
@@ -9,44 +9,44 @@ const rituals = [
 export default function RitualSection() {
   return (
     <section id="ritual" className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
-      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="overflow-hidden rounded-[2rem] bg-[#1B4332] text-[#FFF8E7] shadow-[0_28px_80px_rgba(27,67,50,0.25)] lg:p-0">
-          <div className="relative h-full min-h-[360px]">
-            <RevealImage
-              src="/prdimg/ButterflyPeaLemon/1.png"
-              alt="Butterfly Pea Lemon tea ritual scene"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              wrapperClassName="absolute inset-0"
-              skeletonClassName=""
-              className="object-cover opacity-90"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,24,19,0.18),rgba(11,24,19,0.72))]" />
-            <div className="absolute inset-0 flex items-end p-8 lg:p-10">
-              <div className="max-w-[28rem] rounded-[1.5rem] border border-white/10 bg-[linear-gradient(135deg,rgba(11,24,19,0.52),rgba(11,24,19,0.28))] p-5 shadow-[0_18px_36px_rgba(11,24,19,0.2)] backdrop-blur-[2px]">
-                <p className="text-xs uppercase tracking-[0.26em] text-[#FFF8E7]/70">the ritual</p>
-                <h2 className="mt-4 font-serif text-4xl text-[#FFF8E7] md:text-5xl">A calmer pace, one cup at a time.</h2>
-                <p className="mt-5 max-w-md text-base leading-8 text-[#FFF8E7]/80">
-                  Each blend is designed to slow you down and bring more ease into your daily rhythm. That’s the difference between a drink and a ritual.
-                </p>
-              </div>
+      <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch lg:gap-8">
+        <div className="flex min-h-[390px] flex-col rounded-[1.75rem] bg-[#123A2B] p-8 text-[#FFF8E7] shadow-[0_24px_70px_rgba(27,67,50,0.16)] md:p-12 lg:min-h-[500px] lg:p-14">
+          <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#DCC378]/80">THE RITUAL</p>
+
+          <div className="relative mt-5 w-full max-w-[430px] overflow-hidden rounded-[1.25rem] border border-[#DCC378]/25 bg-[#0D2C22] shadow-[0_16px_34px_rgba(0,0,0,0.2)]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(220,195,120,0.18),_transparent_42%),linear-gradient(180deg,rgba(7,24,17,0.06),rgba(7,24,17,0.38))]" />
+            <div className="relative h-[180px] overflow-hidden md:h-[190px]">
+              <Image
+                src="/images/9.png"
+                alt="Tea leaves and a calming tea ritual"
+                fill
+                sizes="(max-width: 768px) 100vw, 430px"
+                className="object-cover object-center saturate-[0.82] contrast-[1.04] brightness-[0.82]"
+                priority
+              />
             </div>
+          </div>
+
+          <div className="mt-6 max-w-xl lg:mt-7">
+            <h2 className="font-serif text-5xl leading-[0.98] tracking-[-0.045em] md:text-6xl">A calmer pace, one cup at a time.</h2>
+            <p className="mt-7 max-w-md text-[15px] leading-7 text-[#FFF8E7]/68 md:text-base">
+              Each blend is designed to make room for a slower, more attentive rhythm. Let the water warm, let the leaves open, and let the day arrive at its own pace.
+            </p>
           </div>
         </div>
 
-        <div className="grid gap-5">
+        <div className="grid gap-3">
           {rituals.map((ritual, index) => (
             <div
               key={ritual.title}
-              className="flex items-start gap-5 rounded-[1.6rem] border border-[#1B4332]/10 bg-[#FFF8E7] p-5 shadow-[0_16px_40px_rgba(27,67,50,0.06)]"
+              className="flex min-h-[145px] items-start gap-5 rounded-[1.25rem] border border-[#1B4332]/10 bg-[#F7F1E5] px-6 py-6 shadow-[0_12px_30px_rgba(27,67,50,0.035)] md:min-h-[158px] md:px-8 md:py-7"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#D4A017]/18 text-lg font-semibold text-[#1B4332]">
-                {index + 1}
+              <div className="w-10 shrink-0 font-serif text-4xl leading-none text-[#B88D27]/75 md:w-14 md:text-5xl">
+                {String(index + 1).padStart(2, "0")}
               </div>
-              <div>
-                <h3 className="font-serif text-2xl text-[#1B4332]">{ritual.title}</h3>
-                <p className="mt-2 text-base leading-7 text-[#1B4332]/70">{ritual.copy}</p>
+              <div className="max-w-xl">
+                <h3 className="font-serif text-2xl text-[#1B4332] md:text-3xl">{ritual.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#1B4332]/65 md:text-base">{ritual.copy}</p>
               </div>
             </div>
           ))}

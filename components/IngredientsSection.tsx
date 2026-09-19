@@ -65,7 +65,7 @@ export default function IngredientsSection() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-[#FFF8E7] py-20 lg:py-28">
+    <section ref={ref} className="bg-[#FDFDFD] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="mb-10 text-center lg:text-left">
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#1B4332]/60">ingredients</p>
@@ -80,9 +80,9 @@ export default function IngredientsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.24, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="ingredient-card group rounded-[2rem] border border-[#1B4332]/10 bg-white/80 p-5 shadow-[0_18px_50px_rgba(27,67,50,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(27,67,50,0.12)]"
+              className="ingredient-card group rounded-[2rem] border border-[#1B4332]/10 bg-[#F7F7F7] p-5 shadow-[0_18px_50px_rgba(27,67,50,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(27,67,50,0.12)]"
             >
-              <div className="overflow-hidden rounded-[1.5rem] bg-[#F5EAC5] p-4">
+              <div className="overflow-hidden rounded-[1.5rem] bg-[#F3F3F3] p-4">
                 <RevealImage
                   src={ingredient.image}
                   alt={ingredient.name}

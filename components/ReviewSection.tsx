@@ -18,7 +18,7 @@ const reviews = [
 
 export default function ReviewSection() {
   return (
-    <section id="reviews" className="bg-[#FFF8E7] py-20 lg:py-28">
+    <section id="reviews" className="bg-[#FDFDFD] py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="mb-10">
           <p className="text-xs uppercase tracking-[0.24em] text-[#1B4332]/60">reviews</p>
@@ -29,7 +29,7 @@ export default function ReviewSection() {
           {reviews.map((review) => (
             <blockquote
               key={review.author}
-              className="rounded-[1.8rem] border border-[#1B4332]/10 bg-white/80 p-6 shadow-[0_18px_50px_rgba(27,67,50,0.05)]"
+              className="rounded-[1.8rem] border border-[#1B4332]/10 bg-[#F7F7F7] p-6 shadow-[0_18px_50px_rgba(27,67,50,0.05)]"
             >
               <div className="mb-5 text-[#D4A017] text-2xl">★★★★★</div>
               <p className="text-lg leading-8 text-[#1B4332]/80">“{review.quote}”</p>

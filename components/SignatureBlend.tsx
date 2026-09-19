@@ -40,12 +40,15 @@ export default function SignatureBlend() {
           <article
             key={blend.name}
             className="group rounded-[2rem] border border-[#1B4332]/10 bg-white/60 p-6 shadow-[0_24px_70px_rgba(27,67,50,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_rgba(27,67,50,0.1)]"
+            style={{ filter: "blur(0px)" }}
           >
             <div
               className="mb-6 flex h-32 items-end rounded-[1.5rem] border border-[#1B4332]/10 p-5"
               style={{
                 background: `linear-gradient(135deg, ${blend.accent}22 0%, rgba(255,248,231,0.9) 100%), url('${blend.image}') center/cover no-repeat`,
                 backgroundPosition: blend.position,
+                backgroundBlendMode: "normal",
+                filter: "blur(0px)",
               }}
             >
               <div className="h-20 w-20 rounded-full border border-[#1B4332]/10 bg-white/50 shadow-inner backdrop-blur-[2px]" />

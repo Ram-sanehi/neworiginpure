@@ -4,19 +4,17 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroSection from "@/components/HeroSection";
-import SignatureBlend from "@/components/SignatureBlend";
 import RitualSection from "@/components/RitualSection";
-import IngredientsSection from "@/components/IngredientsSection";
 import BenefitsSection from "@/components/BenefitsSection";
 import HowToBrewSection from "@/components/HowToBrewSection";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import WhyOriginPure from "@/components/WhyOriginPure";
 import StorySection from "@/components/StorySection";
-import ReviewSection from "@/components/ReviewSection";
 import FinalCTAFooter from "@/components/FinalCTAFooter";
 import StickyBuyBar from "@/components/StickyBuyBar";
 import BrandStory from "@/components/BrandStory";
 import ProductStack from "@/components/ProductStack";
+import TrustBar from "@/components/TrustBar";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -49,21 +47,21 @@ export default function Home() {
       {
         section: document.querySelector('[data-tone="hero"]'),
         from: "#0d1f17",
-        to: "#F3EBD6",
+        to: "#FDFDFD",
       },
       {
         section: document.querySelector('[data-tone="story"]'),
-        from: "#F3EBD6",
-        to: "#F8F3E8",
+        from: "#FDFDFD",
+        to: "#F7F7F7",
       },
       {
         section: document.querySelector('[data-tone="stack"]'),
-        from: "#F8F3E8",
-        to: "#FFF8E7",
+        from: "#F7F7F7",
+        to: "#FDFDFD",
       },
       {
         section: document.querySelector('[data-tone="reviews"]'),
-        from: "#FFF8E7",
+        from: "#FDFDFD",
         to: "#1B4332",
       },
       {
@@ -110,7 +108,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-[#FFF8E7] text-[#1B4332] antialiased">
+    <main className="relative min-h-screen overflow-x-hidden bg-[#FDFDFD] text-[#1B4332] antialiased">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
@@ -120,17 +118,17 @@ export default function Home() {
 
       <div className="relative z-10">
         <HeroSection />
+        <TrustBar />
         <BrandStory />
         <ProductStack />
-        <SignatureBlend />
-        <RitualSection />
-        <IngredientsSection />
+        <div className="-mt-4 md:-mt-6">
+          <RitualSection />
+        </div>
         <BenefitsSection />
         <HowToBrewSection />
         <ReviewsCarousel />
         <WhyOriginPure />
         <StorySection />
-        <ReviewSection />
         <FinalCTAFooter />
       </div>
 

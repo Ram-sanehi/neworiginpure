@@ -1,37 +1,29 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import RevealImage, { waitForImagesReady } from "@/components/RevealImage";
-
-gsap.registerPlugin(ScrollTrigger);
-
 const benefits = [
   {
-    title: "Immunity Booster",
-    description: "Helps strengthen your natural defenses and support everyday wellness.",
+    label: "Immunity",
+    description: "Daily support for natural defenses.",
     icon: ShieldIcon,
   },
   {
-    title: "Relaxing & Calming",
-    description: "Promotes a sense of calm and helps you unwind at the end of the day.",
+    label: "Relaxation",
+    description: "A softer pause for slower evenings.",
     icon: MeditationIcon,
   },
   {
-    title: "Rich in Antioxidants",
-    description: "Packed with antioxidants to help protect cells and support overall vitality.",
+    label: "Antioxidants",
+    description: "Plant-rich support for everyday vitality.",
     icon: RefreshIcon,
   },
   {
-    title: "Aids Digestion",
-    description: "Supports a smoother digestive process with fresh, soothing botanical notes.",
+    label: "Digestion",
+    description: "Fresh botanicals for a lighter finish.",
     icon: StomachIcon,
   },
   {
-    title: "Refreshing & Revitalizing",
-    description: "Delivers a bright, clean lift that helps you feel refreshed and energized.",
+    label: "Metabolism",
+    description: "A clean lift for your daily rhythm.",
     icon: LeafIcon,
   },
 ];
@@ -89,121 +81,19 @@ function LeafIcon({ className }: { className?: string }) {
 }
 
 export default function BenefitsSection() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    let ctx: gsap.Context | undefined;
-
-    const setup = () => {
-      ctx = gsap.context(() => {
-        gsap.utils.toArray<HTMLElement>(".benefit-row").forEach((row, index) => {
-          const icon = row.querySelector("svg");
-
-          gsap.fromTo(
-            row,
-            { opacity: 0, y: 40 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              delay: index * 0.15,
-              scrollTrigger: {
-                trigger: row,
-                start: "top 85%",
-              },
-            }
-          );
-
-          if (icon) {
-            const shapes = Array.from(icon.querySelectorAll("path, circle, line, polyline, polygon")) as SVGGeometryElement[];
-
-            shapes.forEach((shape) => {
-              const length = shape.getTotalLength();
-              gsap.set(shape, {
-                strokeDasharray: length,
-                strokeDashoffset: length,
-              });
-
-              gsap.to(shape, {
-                strokeDashoffset: 0,
-                duration: 1,
-                ease: "power2.out",
-                delay: 0.15 + index * 0.15,
-                scrollTrigger: {
-                  trigger: row,
-                  start: "top 85%",
-                },
-              });
-            });
-          }
-        });
-      }, sectionRef);
-    };
-
-    const cleanup = waitForImagesReady(sectionRef.current, setup);
-
-    return () => {
-      cleanup();
-      ctx?.revert();
-    };
-  }, []);
-
   return (
-    <section ref={sectionRef} className="bg-[#F5EFE6] py-20 lg:py-28">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-12">
-        <div>
-          <p className="text-xs uppercase tracking-[0.24em] text-[#1B4332]/60">benefits</p>
-          <h2 className="mt-3 font-serif text-4xl text-[#1B4332] md:text-5xl">Why people keep coming back.</h2>
-
-          <div className="mt-8 space-y-4">
-            {benefits.map(({ title, description, icon: Icon }, index) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.24, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                className="benefit-row flex items-start gap-4 rounded-[1.5rem] border border-[#1B4332]/10 bg-white/80 p-4 shadow-[0_16px_36px_rgba(27,67,50,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_46px_rgba(27,67,50,0.08)]"
-              >
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FFF8E7] text-[#1B4332] shadow-inner ring-1 ring-[#1B4332]/10">
-                  <Icon className="h-7 w-7" />
-                </div>
-
-                <div>
-                  <h3 className="font-serif text-2xl text-[#1B4332]">{title}</h3>
-                  <p className="mt-1 text-base leading-7 text-[#1B4332]/68">{description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative mx-auto w-full max-w-[520px]">
-          <div className="absolute -left-4 top-10 h-36 w-36 rounded-full bg-[#D4A017]/20 blur-3xl" />
-          <div className="absolute -right-8 bottom-8 h-40 w-40 rounded-full bg-[#1B4332]/15 blur-3xl" />
-
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#1B4332]/10 bg-[#F8EBCF] p-4 shadow-[0_30px_80px_rgba(27,67,50,0.1)]">
-            <div className="relative overflow-hidden rounded-[1.5rem] border border-[#1B4332]/10 bg-[linear-gradient(180deg,#F4E7C5_0%,#FFF8E7_100%)]">
-              <RevealImage
-                src="/prdimg/LemonTulsi/1.png"
-                alt="Lemon Tulsi tea product shot"
-                width={640}
-                height={800}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                wrapperClassName="relative block aspect-[4/5] overflow-hidden"
-                skeletonClassName=""
-                className="aspect-[4/5] h-auto w-full object-cover"
-                loading="lazy"
-              />
-
-              <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <div className="steam-visual steam-1" />
-                <div className="steam-visual steam-2" />
-                <div className="steam-visual steam-3" />
+    <section className="py-8 lg:py-10" style={{ backgroundColor: "#F7F4ED" }}>
+      <div className="mx-auto max-w-7xl overflow-x-auto px-6 [scrollbar-width:none] lg:px-12">
+        <div className="grid min-w-[760px] grid-cols-5 divide-x divide-[#1B4332]/12">
+          {benefits.map(({ label, description, icon: Icon }) => (
+            <article key={label} className="benefit-row px-5 text-center first:pl-0 last:pr-0">
+              <div className="mx-auto flex h-9 w-9 items-center justify-center text-[#B88D27]">
+                <Icon className="h-7 w-7" />
               </div>
-            </div>
-          </div>
+              <h3 className="mt-2 text-sm font-semibold text-[#1B4332]">{label}</h3>
+              <p className="mx-auto mt-1 max-w-[150px] text-xs leading-5 text-[#1B4332]/60">{description}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
